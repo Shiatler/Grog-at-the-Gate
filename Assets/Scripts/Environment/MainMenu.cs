@@ -9,6 +9,11 @@ public class MainMenu : MonoBehaviour
     // PLAY #########################################################
     public void Play()
     {
+        AudioManager am = AudioManager.instance != null ? AudioManager.instance : FindObjectOfType<AudioManager>();
+        if (am != null)
+        {
+            am.Play("ButtonClick");
+        }
         Time.timeScale = 1f; // Reset time scale before loading game scene
         sceneFader.FadeTo(levelSelectScene);
     }

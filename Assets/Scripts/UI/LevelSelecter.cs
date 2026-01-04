@@ -21,6 +21,11 @@ public class LevelSelect : MonoBehaviour
 
     public void Select (string levelName)
     {
+        AudioManager am = AudioManager.instance != null ? AudioManager.instance : FindObjectOfType<AudioManager>();
+        if (am != null)
+        {
+            am.Play("SelectLevel");
+        }
         fader.FadeTo(levelName);
     }
 }

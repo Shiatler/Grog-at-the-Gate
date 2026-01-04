@@ -23,7 +23,7 @@ public class DialogueManager : MonoBehaviour
     {
         sentences = new Queue<string>();
         sounds = new Queue<Sound>();
-        audioManager = FindObjectOfType<AudioManager>();
+        audioManager = AudioManager.instance != null ? AudioManager.instance : FindObjectOfType<AudioManager>();
     }
     // Start the dialogue #########################################################
     public void StartDialogue(Dialogue dialogue)

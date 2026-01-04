@@ -95,7 +95,11 @@ public class Turret : MonoBehaviour
                     lineRenderer.enabled = false;
                     impactEffect.Stop();
                     impactLight.enabled = false;
-                    FindObjectOfType<AudioManager>().Stop("Laser");
+                    AudioManager am = AudioManager.instance != null ? AudioManager.instance : FindObjectOfType<AudioManager>();
+                    if (am != null)
+                    {
+                        am.Stop("Laser");
+                    }
                     AnimationController animController = GetComponent<AnimationController>();
                     if (animController != null)
                     {
@@ -110,7 +114,11 @@ public class Turret : MonoBehaviour
                     fireLineRenderer.enabled = false;
                     fireEffect.Stop();
                     fireLight.enabled = false;
-                    FindObjectOfType<AudioManager>().Stop("Fire");
+                    AudioManager am = AudioManager.instance != null ? AudioManager.instance : FindObjectOfType<AudioManager>();
+                    if (am != null)
+                    {
+                        am.Stop("Fire");
+                    }
                 }
             }
             return;
@@ -187,7 +195,11 @@ public class Turret : MonoBehaviour
             lineRenderer.enabled = true;
             impactEffect.Play();
             impactLight.enabled = true;
-            FindObjectOfType<AudioManager>().Play("Laser");
+            AudioManager am = AudioManager.instance != null ? AudioManager.instance : FindObjectOfType<AudioManager>();
+            if (am != null)
+            {
+                am.Play("Laser");
+            }
             AnimationController animController = GetComponent<AnimationController>();
             if (animController != null)
             {
@@ -216,7 +228,11 @@ public class Turret : MonoBehaviour
             fireLineRenderer.enabled = true;
             fireEffect.Play();
             fireLight.enabled = true;
-            FindObjectOfType<AudioManager>().Play("Fire");
+            AudioManager am = AudioManager.instance != null ? AudioManager.instance : FindObjectOfType<AudioManager>();
+            if (am != null)
+            {
+                am.Play("Fire");
+            }
         }
 
         Vector3 targetCenter = GetTargetCenter(target);

@@ -25,7 +25,11 @@ public class Shop : MonoBehaviour
     {
         Debug.Log("Archer Turret Selected");
         buildManager.SelectTurretToBuild(archerTurret);
-        FindObjectOfType<AudioManager>().Play("ChooseArcher");
+        AudioManager am = AudioManager.instance != null ? AudioManager.instance : FindObjectOfType<AudioManager>();
+        if (am != null)
+        {
+            am.Play("ChooseArcher");
+        }
     }
 
     // SELECT FAST TURRET #########################################################
@@ -34,7 +38,11 @@ public class Shop : MonoBehaviour
     {
         Debug.Log("Crossbow Turret Selected");
         buildManager.SelectTurretToBuild(crossbowTurret);
-        FindObjectOfType<AudioManager>().Play("ChooseCrossbow");
+        AudioManager am = AudioManager.instance != null ? AudioManager.instance : FindObjectOfType<AudioManager>();
+        if (am != null)
+        {
+            am.Play("ChooseCrossbow");
+        }
     }
 
     // SELECT TROLL TURRET #########################################################
@@ -42,7 +50,11 @@ public class Shop : MonoBehaviour
     {
         Debug.Log("Troll Turret Selected");
         buildManager.SelectTurretToBuild(trollTurret);
-        FindObjectOfType<AudioManager>().Play("ChooseTroll");
+        AudioManager am = AudioManager.instance != null ? AudioManager.instance : FindObjectOfType<AudioManager>();
+        if (am != null)
+        {
+            am.Play("ChooseTroll");
+        }
     }
 
     // SELECT GOLEM TURRET #########################################################
@@ -51,7 +63,11 @@ public class Shop : MonoBehaviour
     {
         Debug.Log("Golem Turret Selected");
         buildManager.SelectTurretToBuild(golemTurret);
-        FindObjectOfType<AudioManager>().Play("ChooseGolem");
+        AudioManager am = AudioManager.instance != null ? AudioManager.instance : FindObjectOfType<AudioManager>();
+        if (am != null)
+        {
+            am.Play("ChooseGolem");
+        }
     }
 
     // SELECT WIZARD TURRET #########################################################
@@ -60,7 +76,11 @@ public class Shop : MonoBehaviour
     {
         Debug.Log("Wizard Turret Selected");
         buildManager.SelectTurretToBuild(wizardTurret);
-        FindObjectOfType<AudioManager>().Play("ChooseWizard");
+        AudioManager am = AudioManager.instance != null ? AudioManager.instance : FindObjectOfType<AudioManager>();
+        if (am != null)
+        {
+            am.Play("ChooseWizard");
+        }
     }
 
     // SELECT PYROMANCER TURRET #########################################################
@@ -68,7 +88,11 @@ public class Shop : MonoBehaviour
     {
         Debug.Log("Pyromancer Turret Selected");
         buildManager.SelectTurretToBuild(pyromancerTurret);
-        FindObjectOfType<AudioManager>().Play("ChoosePyromancer");
+        AudioManager am = AudioManager.instance != null ? AudioManager.instance : FindObjectOfType<AudioManager>();
+        if (am != null)
+        {
+            am.Play("ChoosePyromancer");
+        }
     }
 
     // SELECT FIREBOW TURRET #########################################################
@@ -76,6 +100,10 @@ public class Shop : MonoBehaviour
     {
         Debug.Log("Firebow Turret Selected");
         buildManager.SelectTurretToBuild(firebowTurret);
-        FindObjectOfType<AudioManager>().Play("ChooseFirebow");
+        AudioManager am = AudioManager.instance != null ? AudioManager.instance : FindObjectOfType<AudioManager>();
+        if (am != null)
+        {
+            am.Play("ChooseFirebow");
+        }
     }
 }

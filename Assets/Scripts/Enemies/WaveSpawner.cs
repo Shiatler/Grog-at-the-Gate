@@ -81,7 +81,11 @@ public class WaveSpawner : MonoBehaviour
             if (!isSpawning && waves != null && waveIndex < waves.Length) // Only start if not already spawning and waves remain
             {
                 StartCoroutine(SpawnWave());
-                FindObjectOfType<AudioManager>().Play("WarHorn");
+                AudioManager am = AudioManager.instance != null ? AudioManager.instance : FindObjectOfType<AudioManager>();
+                if (am != null)
+                {
+                    am.Play("WarHorn");
+                }
             }
             return;
         }

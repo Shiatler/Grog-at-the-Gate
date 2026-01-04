@@ -66,7 +66,11 @@ public class EnemyMovement : MonoBehaviour
     {
         PlayerStats.Lives--;
         WaveSpawner.enemiesAlive--;
-        FindObjectOfType<AudioManager>().Play("Break");
+        AudioManager am = AudioManager.instance != null ? AudioManager.instance : FindObjectOfType<AudioManager>();
+        if (am != null)
+        {
+            am.Play("Break");
+        }
         Destroy(gameObject);
     }
 }

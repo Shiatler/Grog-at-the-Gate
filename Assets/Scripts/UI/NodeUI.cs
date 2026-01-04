@@ -7,6 +7,7 @@ public class NodeUI : MonoBehaviour
     public GameObject ui;
     public GameObject rangeIndicator;
     private Node target;
+    private Outline currentTurretOutline;
 
     public Button upgradeButton;
     public TextMeshProUGUI upgradeCost;
@@ -38,7 +39,35 @@ public class NodeUI : MonoBehaviour
         }
         
         ui.SetActive(true);
-        FindObjectOfType<AudioManager>().Play("TurretSelect");
+
+        // Highlight the turret with outline
+        if (target.turret != null)
+        {
+            try
+            {
+                Outline outline = target.turret.GetComponent<Outline>();
+                if (outline == null)
+                {
+                    outline = target.turret.AddComponent<Outline>();
+                    outline.OutlineColor = Color.green;
+                    outline.OutlineWidth = 5f;
+                }
+                outline.enabled = true;
+                currentTurretOutline = outline;
+            }
+            catch (System.Exception e)
+            {
+                // Mesh might not be readable, skip outline highlighting
+                Debug.LogWarning("Could not add outline to turret: " + e.Message);
+                currentTurretOutline = null;
+            }
+        }
+
+        AudioManager am = AudioManager.instance != null ? AudioManager.instance : FindObjectOfType<AudioManager>();
+        if (am != null)
+        {
+            am.Play("TurretSelect");
+        }
 
         rangeIndicator.SetActive(true);
         rangeIndicator.transform.position = target.GetBuildPosition();
@@ -56,6 +85,13 @@ public class NodeUI : MonoBehaviour
     {
         ui.SetActive(false);
         rangeIndicator.SetActive(false);
+        
+        // Remove highlight from turret
+        if (currentTurretOutline != null)
+        {
+            currentTurretOutline.enabled = false;
+            currentTurretOutline = null;
+        }
     }
     
     // UPGRADE #########################################################

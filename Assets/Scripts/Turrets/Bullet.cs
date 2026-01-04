@@ -15,9 +15,17 @@ public class Bullet : MonoBehaviour
     public float burnDamage = 10f; // Damage per second (like laser)
     public float burnDuration = 3f;
 
-    public GameObject impactEffect;
     public GameObject burnEffect;
-    
+
+    [Header("Stun Effect")]
+    public bool hasStunEffect = false;
+    public float stunDuration = 3f;
+    public float slowAmountStun = 0.5f;
+    public float stunEffectHeight = 2f; // Height offset for stun effect above enemy
+
+    public GameObject impactEffect;
+    public GameObject stunEffect;
+
     public void Seek(Transform _target)
     {
         target = _target;
@@ -97,6 +105,14 @@ public class Bullet : MonoBehaviour
                 GameObject burnEffectIns = (GameObject)Instantiate(burnEffect, enemy.position, enemy.rotation);
                 burnEffectIns.transform.SetParent(enemy); // Auto-destroyed when enemy dies
                 Destroy(burnEffectIns, burnDuration); // Fallback if enemy survives
+            }
+            if (hasStunEffect)
+            {
+                e.ApplyStun(stunDuration, slowAmountStun);
+                Vector3 stunPosition = enemy.position + Vector3.up * stunEffectHeight;
+                GameObject stunEffectIns = (GameObject)Instantiate(stunEffect, stunPosition, enemy.rotation);
+                stunEffectIns.transform.SetParent(enemy); // Auto-destroyed when enemy dies
+                Destroy(stunEffectIns, stunDuration); // Fallback if enemy survives
             }
         }
     }

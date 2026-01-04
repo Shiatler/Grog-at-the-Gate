@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour
     public Image healthBar;
 
     private Coroutine burnCoroutine;
+    private Coroutine stunCoroutine;
 
     // START #########################################################
 
@@ -61,6 +62,17 @@ public class Enemy : MonoBehaviour
         burnCoroutine = StartCoroutine(BurnOverTime(burnDamagePerSecond, burnDuration));
     }
 
+    // APPLY STUN #########################################################
+    public void ApplyStun(float stunDuration, float slowAmountStun)
+    {
+        if (stunCoroutine != null)
+        {
+            StopCoroutine(stunCoroutine);
+        }
+
+        stunCoroutine = StartCoroutine(StunOverTime(stunDuration, slowAmountStun));
+    }
+
     // BURN OVER TIME #########################################################
     IEnumerator BurnOverTime(float burnDamagePerSecond, float burnDuration)
     {
@@ -75,6 +87,28 @@ public class Enemy : MonoBehaviour
         }
 
         burnCoroutine = null;
+    }
+
+    // STUN OVER TIME #########################################################
+    IEnumerator StunOverTime(float stunDuration, float slowAmountStun)
+    {
+        float elapsedTime = 0f;
+        
+        while (elapsedTime < stunDuration && !isDead)
+        {
+            // Continuously apply slow effect to prevent it from being overridden
+            Slow(slowAmountStun);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Restore speed when stun ends
+        if (!isDead)
+        {
+            speed = startSpeed;
+        }
+
+        stunCoroutine = null;
     }
 
     // DIE #########################################################
